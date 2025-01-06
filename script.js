@@ -2,7 +2,7 @@ const episodes = [
   { number: 13, title: "Season 2, Episode 1: You aren't E-rank, are You", season: 2, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
   { number: 14, title: "Season 2, Episode 2: Coming Soon...", season: 2, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
   { number: 15, title: "Season 2, Episode 3: Coming Soon...", season: 2, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 16, title: "Season 2, Episode 4: Coming Soon...", season: 2, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
+  //{ number: 16, title: "Season 2, Episode 4: Coming Soon...", season: 2, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
 
 
   { number: 1, title: "Season 1, Episode 1: I'm Used To It", season: 1, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
