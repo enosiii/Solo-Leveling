@@ -1,0 +1,79 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #121212;
+  color: #fff;
+  margin: 0;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+p {
+  text-indent: 40px;
+}
+
+
+#episode-grid .card {
+  background-color: #1e1e1e;
+  border: none;
+  color: #fff;
+  transition: transform 0.2s;
+}
+
+#episode-grid .card:hover {
+  transform: scale(1.05);
+}
+
+footer {
+  margin-top: auto;
+}
+
+.embed-responsive {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.embed-responsive::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%; /* Aspect ratio 16:9 */
+}
+
+.embed-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.accordion-button {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #57a1eb;
+}
+
+.accordion-body {
+  background-color: #121212;
+}
+
+.card {
+  background-color: #1e1e1e;
+  border: none;
+  color: #fff;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
