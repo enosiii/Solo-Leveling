@@ -56,7 +56,7 @@ function loadSeasons() {
         <div class="card">
           <img src="episode-thumbnails/${episode.number}.png" class="card-img-top" alt="${episode.title}">
           <div class="card-body">
-            <h5 class="card-title">${episode.title}</h5>
+            <h6 class="card-title">${episode.title}</h6>
             <a href="watch.html?episode=${episode.number}" class="btn btn-primary">Watch Now</a>
           </div>
         </div>
