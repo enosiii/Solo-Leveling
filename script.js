@@ -1,22 +1,21 @@
 const episodes = [
-  { number: 13, title: "Season 2, Episode 1: You aren't E-rank, are You", season: 2, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 14, title: "Season 2, Episode 2: Coming Soon...", season: 2, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 15, title: "Season 2, Episode 3: Coming Soon...", season: 2, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  //{ number: 16, title: "Season 2, Episode 4: Coming Soon...", season: 2, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
+  { number: 13, title: "Season 2, Episode 1: You aren't E-rank, are You", season: 2, link: "https://drive.google.com/file/d/1IbvAJuBMj1DDEYp0_LPy0Ff5ozaatuXv/preview" },
+  { number: 14, title: "Season 2, Episode 2: Coming Soon...", season: 2, link: "https://drive.google.com/file/d/1IbvAJuBMj1DDEYp0_LPy0Ff5ozaatuXv/preview" },
+  { number: 15, title: "Season 2, Episode 3: Coming Soon...", season: 2, link: "https://drive.google.com/file/d/1IbvAJuBMj1DDEYp0_LPy0Ff5ozaatuXv/preview" },
 
 
-  { number: 1, title: "Season 1, Episode 1: I'm Used To It", season: 1, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 2, title: "Season 1, Episode 2: If I Had One More Chance", season: 1, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 3, title: "Season 1, Episode 3: It's Like a Game", season: 1, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 4, title: "Season 1, Episode 4: I Gotta Get Stronger", season: 1, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 5, title: "Season 1, Episode 5: A Pretty Good Deal", season: 1, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 6, title: "Season 1, Episode 6: The Real Hunt Begins", season: 1, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 7, title: "Season 1, Episode 7: Let's See How Far I Can Go", season: 1, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 8, title: "Season 1, Episode 8: This is Frustrating", season: 1, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 9, title: "Season 1, Episode 9: You've Been Hiding Your Skills", season: 1, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 10, title: "Season 1, Episode 10: What Is This, a Picnic?", season: 1, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 11, title: "Season 1, Episode 11: A Knight Who Defends an Empty Throne?", season: 1, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
-  { number: 12, title: "Season 1, Episode 12: Arise", season: 1, link: "https://www.dailymotion.com/embed/video/x9bv5wq" },
+  { number: 1, title: "Season 1, Episode 1: I'm Used To It", season: 1, link: "https://drive.google.com/file/d/1IbvAJuBMj1DDEYp0_LPy0Ff5ozaatuXv/preview" },
+  { number: 2, title: "Season 1, Episode 2: If I Had One More Chance", season: 1, link: "https://drive.google.com/file/d/1JFssvn4Sq8G5K-P_EDh7voOJgF3yUBsE/preview" },
+  { number: 3, title: "Season 1, Episode 3: It's Like a Game", season: 1, link: "https://drive.google.com/file/d/1JFu5l4ieSAbdonRbrC_FS8g970J2hXzm/preview" },
+  { number: 4, title: "Season 1, Episode 4: I Gotta Get Stronger", season: 1, link: "https://drive.google.com/file/d/1IYdehNQumqpR19CG1VavuagO05WIfNQi/preview" },
+  { number: 5, title: "Season 1, Episode 5: A Pretty Good Deal", season: 1, link: "https://drive.google.com/file/d/1IZ9KF03YCtPTzfTL7iOKTf6zUFIAwNGq/preview" },
+  { number: 6, title: "Season 1, Episode 6: The Real Hunt Begins", season: 1, link: "https://drive.google.com/file/d/1J6v40j898qjNxdoPV-a4wEPvHXLurb8R/preview" },
+  { number: 7, title: "Season 1, Episode 7: Let's See How Far I Can Go", season: 1, link: "https://drive.google.com/file/d/1IpNukrIqGyacgfKVDaRgLos695HAma1n/preview" },
+  { number: 8, title: "Season 1, Episode 8: This is Frustrating", season: 1, link: "https://drive.google.com/file/d/1J-l-IOk2LCYcpjHguSsd2JAtdfdKno53/preview" },
+  { number: 9, title: "Season 1, Episode 9: You've Been Hiding Your Skills", season: 1, link: "https://drive.google.com/file/d/1IwZ1mletCO2aAmZqyLBsw6lr3rhEVWfR/preview" },
+  { number: 10, title: "Season 1, Episode 10: What Is This, a Picnic?", season: 1, link: "https://drive.google.com/file/d/1If8QMoKo9jFwISsOpmRm4vFvyNl_FYOY/preview" },
+  { number: 11, title: "Season 1, Episode 11: A Knight Who Defends an Empty Throne?", season: 1, link: "https://drive.google.com/file/d/1--2xhYJlc3NmVKzRR9eQwpPs-O3vTrsQ/preview" },
+  { number: 12, title: "Season 1, Episode 12: Arise", season: 1, link: "https://drive.google.com/file/d/1I_huA7mR8eAtBuZ3NuTpmvrbbNHllUtz/preview" },
   // Add more episodes here...
 ];
 
