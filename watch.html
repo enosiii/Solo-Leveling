@@ -8,37 +8,45 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .download-button {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      z-index: 1000;
+    }
+
+    .video-container {
+      position: relative;
+    }
+  </style>
 </head>
 <body>
   <!-- Header -->
-<header class="bg-dark text-white p-3">
-  <div class="container d-flex justify-content-between align-items-center">
-    <h1 class="m-0 d-flex align-items-center">
-      <a href="index.html">
-        <img src="episode-thumbnails/icon.png" alt="Solo Leveling Icon" class="me-2" style="width: 40px; height: 40px;">
-      </a>
-      Watch Solo Leveling
-    </h1>
-  </div>
-</header>
-  
-  <!-- Header
   <header class="bg-dark text-white p-3">
-    <div class="container">
-      <h1 class="m-0">Solo Leveling Anime</h1>
+    <div class="container d-flex justify-content-between align-items-center">
+      <h1 class="m-0 d-flex align-items-center">
+        <a href="index.html">
+          <img src="episode-thumbnails/icon.png" alt="Solo Leveling Icon" class="me-2" style="width: 40px; height: 40px;">
+        </a>
+        Watch Solo Leveling
+      </h1>
     </div>
-  </header> -->
-  
+  </header>
+
   <main class="container my-4">
     <h4 id="episode-title" class="text-left mb-4"></h4>
 
-    <div class="embed-responsive embed-responsive-16by9 position-relative">
-      <div id="loading-spinner" class="spinner-border text-light position-absolute top-50 start-50 translate-middle" role="status"></div>
-      <iframe 
-        id="video-player" 
-        class="embed-responsive-item d-none" 
-        allowfullscreen 
-        onload="hideSpinner()"></iframe>
+    <div class="video-container">
+      <a id="download-btn" href="#" class="btn btn-success btn-sm download-button" download>Download</a>
+      <div class="embed-responsive embed-responsive-16by9 position-relative">
+        <div id="loading-spinner" class="spinner-border text-light position-absolute top-50 start-50 translate-middle" role="status"></div>
+        <iframe 
+          id="video-player" 
+          class="embed-responsive-item d-none" 
+          allowfullscreen 
+          onload="hideSpinner()"></iframe>
+      </div>
     </div>
 
     <div class="mt-4 d-flex justify-content-between">
@@ -53,31 +61,42 @@
     const params = new URLSearchParams(window.location.search);
     const episodeNumber = parseInt(params.get('episode'));
     const currentEpisode = episodes.find(ep => ep.number === episodeNumber);
-
+  
     const titleElement = document.getElementById('episode-title');
     const videoPlayer = document.getElementById('video-player');
     const loadingSpinner = document.getElementById('loading-spinner');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
-
+    const downloadBtn = document.getElementById('download-btn');
+  
     if (currentEpisode) {
       // Set episode title
       titleElement.textContent = currentEpisode.title;
-
+  
       // Set video source
       videoPlayer.src = currentEpisode.link;
-
+  
+      // Extract file ID from the preview link
+      const fileIdMatch = currentEpisode.link.match(/\/file\/d\/(.*?)\//);
+      if (fileIdMatch) {
+        const fileId = fileIdMatch[1];
+        downloadBtn.href = `https://drive.google.com/uc?id=${fileId}&export=download`;
+      } else {
+        downloadBtn.href = "#"; // Fallback if file ID is not found
+        console.error("Invalid link format: File ID could not be extracted.");
+      }
+  
       // Configure Previous and Next buttons
       const currentSeasonEpisodes = episodes.filter(ep => ep.season === currentEpisode.season);
       const currentIndex = currentSeasonEpisodes.findIndex(ep => ep.number === episodeNumber);
-
+  
       if (currentIndex > 0) {
         const prevEpisode = currentSeasonEpisodes[currentIndex - 1];
         prevBtn.href = `watch.html?episode=${prevEpisode.number}`;
       } else {
         prevBtn.classList.add('d-none');
       }
-
+  
       if (currentIndex < currentSeasonEpisodes.length - 1) {
         const nextEpisode = currentSeasonEpisodes[currentIndex + 1];
         nextBtn.href = `watch.html?episode=${nextEpisode.number}`;
@@ -88,11 +107,11 @@
       alert('Episode not found!');
       window.location.href = 'index.html';
     }
-
+  
     function hideSpinner() {
       loadingSpinner.classList.add('d-none');
       videoPlayer.classList.remove('d-none');
     }
-  </script>
+  </script>  
 </body>
 </html>
