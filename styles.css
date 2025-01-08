@@ -48,10 +48,10 @@ footer {
 
 .embed-responsive iframe {
   position: absolute;
-  top: 7%;
-  left: 7%;
-  width: 86%;
-  height: 86%;
+  top: 1%;
+  left: 1%;
+  width: 98%;
+  height: 98%;
   border: 0;
 }
 
