@@ -1,6 +1,6 @@
 const episodes = [
-  { number: 13, title: "Season 2, Episode 1: Arise from the Shadow", season: 2, link: "https://drive.google.com/file/d/1JQfCufhVlZI5EuMZq3E3QarbFuEWiBmI/preview" },
-  { number: 14, title: "Season 2, Episode 2: Coming Soon...", season: 2, link: "https://drive.google.com/file/d/1JQfCufhVlZI5EuMZq3E3QarbFuEWiBmI/preview" },
+  { number: 13, title: "Season 2, Episode 1: You aren't E-rank, are You", season: 2, link: "https://drive.google.com/file/d/1JQfCufhVlZI5EuMZq3E3QarbFuEWiBmI/preview" },
+  { number: 14, title: "Season 2, Episode 2: I Suppose You aren’t Aware", season: 2, link: "https://drive.google.com/file/d/1Lt9dnLo7NQ5MIm71qYvqayCKp8I30CMg/preview" },
   { number: 15, title: "Season 2, Episode 3: Coming Soon...", season: 2, link: "https://drive.google.com/file/d/1JQfCufhVlZI5EuMZq3E3QarbFuEWiBmI/preview" },
 
 
