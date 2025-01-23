@@ -40,11 +40,13 @@ Visit the live site here: [Solo Leveling Anime Website](https://enosiii.github.i
 ### Steps:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/enosiii/Solo-Leveling.git```
+   git clone https://github.com/enosiii/Solo-Leveling.git
+   ```
 2. Open the `index.html` file in your browser:
    ```bash
-  cd Solo-Leveling open index.html```
-3. Enjoy exploring Solo Leveling!
+   cd Solo-Leveling open index.html
+   ```
+4. Enjoy exploring Solo Leveling!
 
 ---
 
