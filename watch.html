@@ -19,9 +19,17 @@
     .video-container {
       position: relative;
     }
+
+    .fullscreen-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 1000;
+    }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header class="bg-dark text-white p-3">
     <div class="container d-flex justify-content-between align-items-center">
       <h1 class="m-0 d-flex align-items-center">
@@ -36,7 +44,7 @@
   <main class="container my-4">
     <h4 id="episode-title" class="text-left mb-4"></h4>
 
-    <div class="video-container">
+    <div class="video-container" id="video-container">
       <a id="download-btn" href="#" class="btn btn-success btn-sm download-button" download>Download</a>
       <div class="embed-responsive embed-responsive-16by9 position-relative">
         <div id="loading-spinner" class="spinner-border text-light position-absolute top-50 start-50 translate-middle" role="status"></div>
@@ -46,6 +54,7 @@
           allowfullscreen 
           onload="hideSpinner()"></iframe>
       </div>
+      <button id="fullscreen-btn" class="btn btn-secondary fullscreen-btn">Fullscreen</button>
     </div>
 
     <div class="mt-4 d-flex justify-content-between">
@@ -55,6 +64,7 @@
     </div>
   </main>
 
+  <!-- Footer -->
   <footer class="bg-dark text-white text-center py-3">
     <h6>© 2025 Solo Leveling Anime | Built with ♥</h6>
     <a href="https://t.me/SoloLevelingStream" target="_blank" class="btn btn-primary mt-2">
@@ -62,6 +72,7 @@
     </a>
   </footer>
 
+  <script src="script.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const episodeNumber = parseInt(params.get('episode'));
@@ -69,10 +80,15 @@
 
     const titleElement = document.getElementById('episode-title');
     const videoPlayer = document.getElementById('video-player');
+    const videoContainer = document.getElementById('video-container');
     const loadingSpinner = document.getElementById('loading-spinner');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     const downloadBtn = document.getElementById('download-btn');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+    let tapTimeout;
+    let tapCount = 0;
 
     if (currentEpisode) {
       titleElement.textContent = currentEpisode.title;
@@ -113,34 +129,47 @@
       videoPlayer.classList.remove('d-none');
     }
 
-    // Gesture Handling
-    let tapTimeout;
-    let lastTapTime = 0;
+    function handleTap(e) {
+      tapCount++;
+      clearTimeout(tapTimeout);
 
-    videoPlayer.parentElement.addEventListener('touchstart', (event) => {
-      const currentTime = new Date().getTime();
+      tapTimeout = setTimeout(() => {
+        if (tapCount === 1) {
+          togglePlayPause();
+        } else if (tapCount === 2) {
+          const rect = e.target.getBoundingClientRect();
+          if (e.clientX < rect.width / 2) {
+            seekVideo(-10);
+          } else {
+            seekVideo(30);
+          }
+        }
+        tapCount = 0;
+      }, 300);
+    }
 
-      if (currentTime - lastTapTime < 300) {
-        // Double-tap detected
-        clearTimeout(tapTimeout);
-        videoPlayer.contentWindow.postMessage('{"event":"command","func":"+30s"}', '*');
-        lastTapTime = 0; // Reset to prevent a triple tap
-      } else {
-        // Single tap handler (play video)
-        tapTimeout = setTimeout(() => {
-          videoPlayer.parentElement.classList.toggle('show-controls'); // Toggle controls
-        }, 300);
+    function togglePlayPause() {
+      const iframe = videoPlayer.contentWindow;
+      iframe.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    }
+
+    function seekVideo(seconds) {
+      const iframe = videoPlayer.contentWindow;
+      iframe.postMessage(`{"event":"command","func":"seekTo","args":[${seconds},true]}`, '*');
+    }
+
+    function enableFullscreen() {
+      if (videoContainer.requestFullscreen) {
+        videoContainer.requestFullscreen();
+      } else if (videoContainer.webkitRequestFullscreen) {
+        videoContainer.webkitRequestFullscreen();
+      } else if (videoContainer.msRequestFullscreen) {
+        videoContainer.msRequestFullscreen();
       }
-      lastTapTime = currentTime;
-    });
+    }
 
-    videoPlayer.parentElement.addEventListener('touchend', (event) => {
-      // Long press for fullscreen
-      if (event.touches.length === 0) {
-        clearTimeout(tapTimeout);
-      }
-    });
-
+    videoContainer.addEventListener('click', handleTap);
+    fullscreenBtn.addEventListener('click', enableFullscreen);
   </script>
 </body>
 </html>
