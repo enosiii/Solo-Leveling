@@ -67,22 +67,34 @@
   <script src="script.js"></script>
   <script>
     // Fullscreen availability check and alert
-    document.addEventListener('DOMContentLoaded', () => {
-      const videoPlayer = document.getElementById('video-player');
-      const isFullscreenAvailable = document.fullscreenEnabled || document.webkitFullscreenEnabled || document.mozFullScreenEnabled;
+      document.addEventListener('DOMContentLoaded', () => {
+    const videoPlayer = document.getElementById('video-player');
+    const isFullscreenAvailable = document.fullscreenEnabled || document.webkitFullscreenEnabled || document.mozFullScreenEnabled;
 
+    // Listen for fullscreen button press
+    videoPlayer.addEventListener('fullscreenchange', onFullscreenChange);
+    videoPlayer.addEventListener('webkitfullscreenchange', onFullscreenChange);
+    videoPlayer.addEventListener('mozfullscreenchange', onFullscreenChange);
+
+    function onFullscreenChange() {
+      // Check if entering fullscreen
+      if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement) {
+        return;
+      }
+
+      // If fullscreen is unavailable and user tries to enter fullscreen, show alert
       if (!isFullscreenAvailable) {
-        // If fullscreen is unavailable, display a message and alert the user
         alert("Fullscreen is unavailable in your browser. Please open this link in an external browser for fullscreen support.");
 
-        // Optionally, provide a button or link to prompt opening in an external browser
+        // Suggest opening the link in another browser
         const openInBrowserBtn = document.createElement('a');
-        openInBrowserBtn.href = window.location.href;  // Current page URL
+        openInBrowserBtn.href = window.location.href;
         openInBrowserBtn.textContent = "Open in External Browser";
         openInBrowserBtn.classList.add('btn', 'btn-info', 'mt-2');
         document.body.appendChild(openInBrowserBtn);
       }
-    });
+    }
+  });
 
     // Existing code for episode handling
     const params = new URLSearchParams(window.location.search);
