@@ -84,12 +84,12 @@
       notification.style.padding = '15px';
       notification.style.borderRadius = '5px';
       notification.style.zIndex = '1000';
-      notification.textContent = "Fullscreen is unavailable in your browser. Copy the link and open it in an external browser.";
+      notification.style.textAlign = 'center';  // Align the text in the center
+      notification.innerHTML = "Fullscreen is unavailable in your browser. <br><br>• Telegram: Click the three dots (⁝) then click the 'Open in Browser' <br><br>• Copy the link and open it in an external browser.";
 
       // Create the "Copy Link" button
       const copyLinkBtn = document.createElement('button');
       copyLinkBtn.textContent = "Copy Link";
-      copyLinkBtn.style.display = 'inline-block';
       copyLinkBtn.style.marginTop = '10px';
       copyLinkBtn.style.padding = '10px 20px';
       copyLinkBtn.style.backgroundColor = '#007bff';
@@ -97,14 +97,22 @@
       copyLinkBtn.style.border = 'none';
       copyLinkBtn.style.borderRadius = '5px';
       copyLinkBtn.style.cursor = 'pointer';
+      
+      // Align the button to the center using flexbox
+      notification.style.display = 'flex';
+      notification.style.flexDirection = 'column';
+      notification.style.alignItems = 'center';
 
       // Button click event to copy the link to clipboard
       copyLinkBtn.addEventListener('click', () => {
         const link = window.location.href; // Get the current page URL
         navigator.clipboard.writeText(link).then(() => {
-          alert('Link copied to clipboard!'); // Notify the user that the link was copied
+          // Change the button text and update the notification text after copying the link
+          copyLinkBtn.textContent = "Link Copied ✅";
+          notification.innerHTML = "The link has been copied to your clipboard! You can now open it in an external browser.";
         }).catch((err) => {
-          alert('Failed to copy the link: ' + err); // In case there is an error copying the link
+          // In case there is an error copying the link, update the notification with an error message
+          notification.innerHTML = 'Failed to copy the link: ' + err;
         });
       });
 
