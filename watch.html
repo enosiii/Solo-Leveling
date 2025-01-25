@@ -19,13 +19,6 @@
     .video-container {
       position: relative;
     }
-
-    .fullscreen-btn {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      z-index: 1000;
-    }
   </style>
 </head>
 <body>
@@ -44,7 +37,7 @@
   <main class="container my-4">
     <h4 id="episode-title" class="text-left mb-4"></h4>
 
-    <div class="video-container" id="video-container">
+    <div class="video-container">
       <a id="download-btn" href="#" class="btn btn-success btn-sm download-button" download>Download</a>
       <div class="embed-responsive embed-responsive-16by9 position-relative">
         <div id="loading-spinner" class="spinner-border text-light position-absolute top-50 start-50 translate-middle" role="status"></div>
@@ -54,7 +47,6 @@
           allowfullscreen 
           onload="hideSpinner()"></iframe>
       </div>
-      <button id="fullscreen-btn" class="btn btn-secondary fullscreen-btn">Fullscreen</button>
     </div>
 
     <div class="mt-4 d-flex justify-content-between">
@@ -80,29 +72,29 @@
 
     const titleElement = document.getElementById('episode-title');
     const videoPlayer = document.getElementById('video-player');
-    const videoContainer = document.getElementById('video-container');
     const loadingSpinner = document.getElementById('loading-spinner');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     const downloadBtn = document.getElementById('download-btn');
-    const fullscreenBtn = document.getElementById('fullscreen-btn');
-
-    let tapTimeout;
-    let tapCount = 0;
 
     if (currentEpisode) {
+      // Set episode title
       titleElement.textContent = currentEpisode.title;
+
+      // Set video source
       videoPlayer.src = currentEpisode.link;
 
+      // Extract file ID from the preview link
       const fileIdMatch = currentEpisode.link.match(/\/file\/d\/(.*?)\//);
       if (fileIdMatch) {
         const fileId = fileIdMatch[1];
         downloadBtn.href = `https://drive.google.com/uc?id=${fileId}&export=download`;
       } else {
-        downloadBtn.href = "#";
+        downloadBtn.href = "#"; // Fallback if file ID is not found
         console.error("Invalid link format: File ID could not be extracted.");
       }
 
+      // Configure Previous and Next buttons
       const currentSeasonEpisodes = episodes.filter(ep => ep.season === currentEpisode.season);
       const currentIndex = currentSeasonEpisodes.findIndex(ep => ep.number === episodeNumber);
 
@@ -129,47 +121,21 @@
       videoPlayer.classList.remove('d-none');
     }
 
-    function handleTap(e) {
-      tapCount++;
-      clearTimeout(tapTimeout);
+    // Event listener to force landscape on fullscreen for mobile devices
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      videoPlayer.addEventListener('webkitfullscreenchange', onFullscreenChange);
+      videoPlayer.addEventListener('fullscreenchange', onFullscreenChange);
+      videoPlayer.addEventListener('mozfullscreenchange', onFullscreenChange);
 
-      tapTimeout = setTimeout(() => {
-        if (tapCount === 1) {
-          togglePlayPause();
-        } else if (tapCount === 2) {
-          const rect = e.target.getBoundingClientRect();
-          if (e.clientX < rect.width / 2) {
-            seekVideo(-10);
-          } else {
-            seekVideo(30);
-          }
+      function onFullscreenChange() {
+        if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement) {
+          // Check for mobile and force landscape mode
+          screen.orientation.lock("landscape").catch(err => {
+            console.error("Orientation lock failed: ", err);
+          });
         }
-        tapCount = 0;
-      }, 300);
-    }
-
-    function togglePlayPause() {
-      const iframe = videoPlayer.contentWindow;
-      iframe.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-    }
-
-    function seekVideo(seconds) {
-      const iframe = videoPlayer.contentWindow;
-      iframe.postMessage(`{"event":"command","func":"seekTo","args":[${seconds},true]}`, '*');
-    }
-
-    function enableFullscreen() {
-      if (videoContainer.requestFullscreen) {
-        videoContainer.requestFullscreen();
-      } else if (videoContainer.webkitRequestFullscreen) {
-        videoContainer.webkitRequestFullscreen();
-      } else if (videoContainer.msRequestFullscreen) {
-        videoContainer.msRequestFullscreen();
       }
     }
-
-    videoContainer.addEventListener('click', handleTap);
-    fullscreenBtn.addEventListener('click', enableFullscreen);
   </script>
 </body>
 </html>
