@@ -19,44 +19,9 @@
     .video-container {
       position: relative;
     }
-
-    .video-tap-area {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 50%;
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    .tap-left {
-      left: 0;
-      background: rgba(0, 0, 0, 0.2); /* Optional for debugging */
-    }
-
-    .tap-right {
-      right: 0;
-      background: rgba(0, 0, 0, 0.2); /* Optional for debugging */
-    }
-
-    .video-tap-area span {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 18px;
-      font-weight: bold;
-      color: white;
-      display: none;
-    }
-
-    .show-feedback {
-      display: block !important;
-    }
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header class="bg-dark text-white p-3">
     <div class="container d-flex justify-content-between align-items-center">
       <h1 class="m-0 d-flex align-items-center">
@@ -80,14 +45,6 @@
           class="embed-responsive-item d-none" 
           allowfullscreen 
           onload="hideSpinner()"></iframe>
-
-        <!-- Tap areas -->
-        <div class="video-tap-area tap-left" id="tap-left">
-          <span id="rewind-feedback">-10s</span>
-        </div>
-        <div class="video-tap-area tap-right" id="tap-right">
-          <span id="forward-feedback">+30s</span>
-        </div>
       </div>
     </div>
 
@@ -98,7 +55,6 @@
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="bg-dark text-white text-center py-3">
     <h6>© 2025 Solo Leveling Anime | Built with ♥</h6>
     <a href="https://t.me/SoloLevelingStream" target="_blank" class="btn btn-primary mt-2">
@@ -106,7 +62,6 @@
     </a>
   </footer>
 
-  <script src="script.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const episodeNumber = parseInt(params.get('episode'));
@@ -118,14 +73,6 @@
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     const downloadBtn = document.getElementById('download-btn');
-
-    const tapLeft = document.getElementById('tap-left');
-    const tapRight = document.getElementById('tap-right');
-    const rewindFeedback = document.getElementById('rewind-feedback');
-    const forwardFeedback = document.getElementById('forward-feedback');
-
-    let lastTapLeft = 0;
-    let lastTapRight = 0;
 
     if (currentEpisode) {
       titleElement.textContent = currentEpisode.title;
@@ -166,42 +113,34 @@
       videoPlayer.classList.remove('d-none');
     }
 
-    // Double-tap detection for rewind (left)
-    tapLeft.addEventListener("click", () => {
+    // Gesture Handling
+    let tapTimeout;
+    let lastTapTime = 0;
+
+    videoPlayer.parentElement.addEventListener('touchstart', (event) => {
       const currentTime = new Date().getTime();
-      if (currentTime - lastTapLeft < 300) {
-        videoPlayer.contentWindow.postMessage(JSON.stringify({ event: 'seek', seconds: -10 }), '*');
-        showFeedback(rewindFeedback);
+
+      if (currentTime - lastTapTime < 300) {
+        // Double-tap detected
+        clearTimeout(tapTimeout);
+        videoPlayer.contentWindow.postMessage('{"event":"command","func":"+30s"}', '*');
+        lastTapTime = 0; // Reset to prevent a triple tap
+      } else {
+        // Single tap handler (play video)
+        tapTimeout = setTimeout(() => {
+          videoPlayer.parentElement.classList.toggle('show-controls'); // Toggle controls
+        }, 300);
       }
-      lastTapLeft = currentTime;
+      lastTapTime = currentTime;
     });
 
-    // Double-tap detection for forward (right)
-    tapRight.addEventListener("click", () => {
-      const currentTime = new Date().getTime();
-      if (currentTime - lastTapRight < 300) {
-        videoPlayer.contentWindow.postMessage(JSON.stringify({ event: 'seek', seconds: 30 }), '*');
-        showFeedback(forwardFeedback);
-      }
-      lastTapRight = currentTime;
-    });
-
-    // Show feedback for rewind or forward
-    function showFeedback(feedbackElement) {
-      feedbackElement.classList.add("show-feedback");
-      setTimeout(() => {
-        feedbackElement.classList.remove("show-feedback");
-      }, 1000);
-    }
-
-    // Fullscreen landscape lock
-    document.addEventListener("fullscreenchange", () => {
-      if (document.fullscreenElement) {
-        screen.orientation.lock("landscape").catch(err => {
-          console.warn("Use different browser. Fullscreen(Landscape) not supported:", err);
-        });
+    videoPlayer.parentElement.addEventListener('touchend', (event) => {
+      // Long press for fullscreen
+      if (event.touches.length === 0) {
+        clearTimeout(tapTimeout);
       }
     });
+
   </script>
 </body>
 </html>
