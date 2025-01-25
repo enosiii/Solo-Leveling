@@ -67,32 +67,42 @@
   <script src="script.js"></script>
   <script>
     // Fullscreen availability check and alert
-      document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
     const videoPlayer = document.getElementById('video-player');
     const isFullscreenAvailable = document.fullscreenEnabled || document.webkitFullscreenEnabled || document.mozFullScreenEnabled;
 
-    // Listen for fullscreen button press
-    videoPlayer.addEventListener('fullscreenchange', onFullscreenChange);
-    videoPlayer.addEventListener('webkitfullscreenchange', onFullscreenChange);
-    videoPlayer.addEventListener('mozfullscreenchange', onFullscreenChange);
+    // Check if fullscreen is unavailable and display a custom notification
+    if (!isFullscreenAvailable) {
+      // Create a custom notification
+      const notification = document.createElement('div');
+      notification.style.position = 'fixed';
+      notification.style.bottom = '20px';
+      notification.style.left = '50%';
+      notification.style.transform = 'translateX(-50%)';
+      notification.style.backgroundColor = '#f8d7da';
+      notification.style.color = '#721c24';
+      notification.style.padding = '15px';
+      notification.style.borderRadius = '5px';
+      notification.style.zIndex = '1000';
+      notification.textContent = "Fullscreen is unavailable in your browser. Please open this link in an external browser for fullscreen support.";
 
-    function onFullscreenChange() {
-      // Check if entering fullscreen
-      if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement) {
-        return;
-      }
+      // Create the "Open in External Browser" button
+      const openInBrowserBtn = document.createElement('a');
+      openInBrowserBtn.href = window.location.href; // Current page URL
+      openInBrowserBtn.textContent = "Open in External Browser";
+      openInBrowserBtn.style.display = 'inline-block';
+      openInBrowserBtn.style.marginTop = '10px';
+      openInBrowserBtn.style.padding = '10px 20px';
+      openInBrowserBtn.style.backgroundColor = '#007bff';
+      openInBrowserBtn.style.color = 'white';
+      openInBrowserBtn.style.textDecoration = 'none';
+      openInBrowserBtn.style.borderRadius = '5px';
 
-      // If fullscreen is unavailable and user tries to enter fullscreen, show alert
-      if (!isFullscreenAvailable) {
-        alert("Fullscreen is unavailable in your browser. Please open this link in an external browser for fullscreen support.");
+      // Append button to notification
+      notification.appendChild(openInBrowserBtn);
 
-        // Suggest opening the link in another browser
-        const openInBrowserBtn = document.createElement('a');
-        openInBrowserBtn.href = window.location.href;
-        openInBrowserBtn.textContent = "Open in External Browser";
-        openInBrowserBtn.classList.add('btn', 'btn-info', 'mt-2');
-        document.body.appendChild(openInBrowserBtn);
-      }
+      // Append notification to the body
+      document.body.appendChild(notification);
     }
   });
 
