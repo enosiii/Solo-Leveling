@@ -67,63 +67,82 @@
   <script src="script.js"></script>
   <script>
     // Fullscreen availability check and alert
-        document.addEventListener('DOMContentLoaded', () => {
-    const videoPlayer = document.getElementById('video-player');
-    const isFullscreenAvailable = document.fullscreenEnabled || document.webkitFullscreenEnabled || document.mozFullScreenEnabled;
+     // Fullscreen availability check and alert
+document.addEventListener('DOMContentLoaded', () => {
+  const videoPlayer = document.getElementById('video-player');
+  const isFullscreenAvailable = document.fullscreenEnabled || document.webkitFullscreenEnabled || document.mozFullScreenEnabled;
 
-    // Check if fullscreen is unavailable and display a custom notification
-    if (!isFullscreenAvailable) {
-      // Create a custom notification
-      const notification = document.createElement('div');
-      notification.style.position = 'fixed';
-      notification.style.bottom = '20px';
-      notification.style.left = '50%';
-      notification.style.transform = 'translateX(-50%)';
-      notification.style.width = '70%';  // Set a wider width for the notification
-      notification.style.backgroundColor = '#f8d7da';
-      notification.style.color = '#721c24';
-      notification.style.padding = '15px';
-      notification.style.borderRadius = '5px';
-      notification.style.zIndex = '1000';
-      notification.style.textAlign = 'center';  // Align the text in the center
-      notification.innerHTML = "<strong>Fullscreen is unavailable in your browser.</strong><br>• Telegram: On the upper-right click the three dots (⁝) then click the 'Open in Browser'. <br>• Or copy the link and open it in an external browser. Enjoy Watching! ☺️";
+  // Check if fullscreen is unavailable and display a custom notification
+  if (!isFullscreenAvailable) {
+    // Create a custom notification
+    const notification = document.createElement('div');
+    notification.style.position = 'fixed';
+    notification.style.bottom = '20px';
+    notification.style.left = '50%';
+    notification.style.transform = 'translateX(-50%)';
+    notification.style.width = '70%';  // Set a wider width for the notification
+    notification.style.backgroundColor = '#f8d7da';
+    notification.style.color = '#721c24';
+    notification.style.padding = '15px';
+    notification.style.borderRadius = '5px';
+    notification.style.zIndex = '1000';
+    notification.style.textAlign = 'center';  // Align the text in the center
+    notification.innerHTML = "<strong>Fullscreen is unavailable in your browser.</strong><br>• Telegram: On the upper-right click the three dots (⁝) then click the 'Open in Browser'. <br>• Or copy the link and open it in an external browser. Enjoy Watching! ☺️";
 
-      // Create the "Copy Link" button
-      const copyLinkBtn = document.createElement('button');
-      copyLinkBtn.textContent = "Copy Link";
-      copyLinkBtn.style.marginTop = '10px';
-      copyLinkBtn.style.padding = '10px 20px';
-      copyLinkBtn.style.backgroundColor = '#007bff';
-      copyLinkBtn.style.color = 'white';
-      copyLinkBtn.style.border = 'none';
-      copyLinkBtn.style.borderRadius = '5px';
-      copyLinkBtn.style.cursor = 'pointer';
-      
-      // Align the button to the center using flexbox
-      notification.style.display = 'flex';
-      notification.style.flexDirection = 'column';
-      notification.style.alignItems = 'center';
+    // Create the "Copy Link" button
+    const copyLinkBtn = document.createElement('button');
+    copyLinkBtn.textContent = "Copy Link";
+    copyLinkBtn.style.marginTop = '10px';
+    copyLinkBtn.style.padding = '10px 20px';
+    copyLinkBtn.style.backgroundColor = '#007bff';
+    copyLinkBtn.style.color = 'white';
+    copyLinkBtn.style.border = 'none';
+    copyLinkBtn.style.borderRadius = '5px';
+    copyLinkBtn.style.cursor = 'pointer';
+    
+    // Align the button to the center using flexbox
+    notification.style.display = 'flex';
+    notification.style.flexDirection = 'column';
+    notification.style.alignItems = 'center';
 
-      // Button click event to copy the link to clipboard
-      copyLinkBtn.addEventListener('click', () => {
-        const link = window.location.href; // Get the current page URL
-        navigator.clipboard.writeText(link).then(() => {
-          // Change the button text and update the notification text after copying the link
-          copyLinkBtn.textContent = "Link Copied ✅";
-          //notification.innerHTML = "The link has been copied to your clipboard! You can now open it in an external browser.";
-        }).catch((err) => {
-          // In case there is an error copying the link, update the notification with an error message
-          alert('Failed to copy the link: ' + err); // In case there is an error copying the link
-        });
+    // Button click event to copy the link to clipboard
+    copyLinkBtn.addEventListener('click', () => {
+      const link = window.location.href; // Get the current page URL
+      navigator.clipboard.writeText(link).then(() => {
+        // Change the button text after copying the link
+        copyLinkBtn.textContent = "Link Copied ✅";
+      }).catch((err) => {
+        // In case there is an error copying the link, alert the user
+        alert('Failed to copy the link: ' + err);
       });
+    });
 
-      // Append button to notification
-      notification.appendChild(copyLinkBtn);
+    // Create the close button
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = '× Close';
+    closeBtn.style.position = 'absolute';
+    closeBtn.style.top = '10px';
+    closeBtn.style.right = '10px';
+    closeBtn.style.backgroundColor = 'transparent';
+    closeBtn.style.border = 'none';
+    closeBtn.style.fontSize = '18px';
+    closeBtn.style.cursor = 'pointer';
+    closeBtn.style.color = '#721c24';
 
-      // Append notification to the body
-      document.body.appendChild(notification);
-    }
-  });
+    // Close button click event to remove the notification
+    closeBtn.addEventListener('click', () => {
+      notification.remove();
+    });
+
+    // Append the close button and "Copy Link" button to the notification
+    notification.appendChild(closeBtn);
+    notification.appendChild(copyLinkBtn);
+
+    // Append the notification to the body
+    document.body.appendChild(notification);
+  }
+});
+
 
     // Existing code for episode handling
     const params = new URLSearchParams(window.location.search);
