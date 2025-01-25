@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://kit.fontawesome.com/effcbc0526.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="styles.css">
   <style>
     .download-button {
@@ -51,9 +52,9 @@
     </div>
 
     <div class="mt-4 d-flex justify-content-between">
-      <a id="prev-btn" href="#" class="btn btn-primary"><i class="fas fa-backward"></i>Previous Episode</a>
-      <a href="index.html" class="btn btn-secondary"><i class="fa fa-list"></i>Episodes List</a>
-      <a id="next-btn" href="#" class="btn btn-primary">Next Episode<i class="fas fa-forward"></i></a>
+      <a id="prev-btn" href="#" class="btn btn-primary"><i class="fas fa-backward"></i> Previous Episode</a>
+      <a href="index.html" class="btn btn-secondary"><i class="fa fa-list"></i> Episodes List</a>
+      <a id="next-btn" href="#" class="btn btn-primary">Next Episode <i class="fas fa-forward"></i></a>
     </div>
   </main>
 
@@ -88,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     notification.style.borderRadius = '5px';
     notification.style.zIndex = '1000';
     notification.style.textAlign = 'center';  // Align the text in the center
-    notification.innerHTML = "<strong>Fullscreen is unavailable in your browser.</strong><br>• Telegram: On the upper-right click the three dots <i class="fa-solid fa-ellipsis-vertical"></i> then click the '<i class="fa-solid fa-arrow-up-right-from-square"></i> Open in Browser'. <br>• Or copy the link and open it in an external browser. Enjoy Watching! ☺️";
+    notification.innerHTML = "<strong>Fullscreen is unavailable in your browser.</strong><br>• Telegram: On the upper-right click the three dots <i class="fas fa-ellipsis-vertical"></i> then click the '<i class="fa-solid fa-arrow-up-right-from-square"></i> Open in Browser'. <br>• Or copy the link and open it in an external browser. Enjoy Watching! ☺️";
 
     // Create the "Copy Link" button
     const copyLinkBtn = document.createElement('button');
