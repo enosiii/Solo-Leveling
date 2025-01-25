@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watch Solo Leveling</title>
+  <link rel="icon" href="episode-thumbnails/icon.png" type="image/jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .download-button {
+      position: absolute;
+      top: -25px;
+      right: 3%;
+      z-index: 1000;
+    }
+
+    .video-container {
+      position: relative;
+    }
+
+    .video-tap-area {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .tap-left {
+      left: 0;
+      background: rgba(0, 0, 0, 0.2); /* Optional for debugging */
+    }
+
+    .tap-right {
+      right: 0;
+      background: rgba(0, 0, 0, 0.2); /* Optional for debugging */
+    }
+
+    .video-tap-area span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      display: none;
+    }
+
+    .show-feedback {
+      display: block !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="bg-dark text-white p-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h1 class="m-0 d-flex align-items-center">
+        <a href="index.html">
+          <img src="episode-thumbnails/icon.png" alt="Solo Leveling Icon" class="me-2" style="width: 40px; height: 40px;">
+        </a>
+        Watch Solo Leveling
+      </h1>
+    </div>
+  </header>
+
+  <main class="container my-4">
+    <h4 id="episode-title" class="text-left mb-4"></h4>
+
+    <div class="video-container">
+      <a id="download-btn" href="#" class="btn btn-success btn-sm download-button" download>Download</a>
+      <div class="embed-responsive embed-responsive-16by9 position-relative">
+        <div id="loading-spinner" class="spinner-border text-light position-absolute top-50 start-50 translate-middle" role="status"></div>
+        <iframe 
+          id="video-player" 
+          class="embed-responsive-item d-none" 
+          allowfullscreen 
+          onload="hideSpinner()"></iframe>
+
+        <!-- Tap areas -->
+        <div class="video-tap-area tap-left" id="tap-left">
+          <span id="rewind-feedback">-10s</span>
+        </div>
+        <div class="video-tap-area tap-right" id="tap-right">
+          <span id="forward-feedback">+30s</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-between">
+      <a id="prev-btn" href="#" class="btn btn-secondary">«Previous Episode</a>
+      <a href="index.html" class="btn btn-primary">Back to Episodes</a>
+      <a id="next-btn" href="#" class="btn btn-secondary">Next Episode»</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <h6>© 2025 Solo Leveling Anime | Built with ♥</h6>
+    <a href="https://t.me/SoloLevelingStream" target="_blank" class="btn btn-primary mt-2">
+      Join Telegram Channel to Get Notified on New Episodes
+    </a>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const episodeNumber = parseInt(params.get('episode'));
+    const currentEpisode = episodes.find(ep => ep.number === episodeNumber);
+
+    const titleElement = document.getElementById('episode-title');
+    const videoPlayer = document.getElementById('video-player');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const downloadBtn = document.getElementById('download-btn');
+
+    const tapLeft = document.getElementById('tap-left');
+    const tapRight = document.getElementById('tap-right');
+    const rewindFeedback = document.getElementById('rewind-feedback');
+    const forwardFeedback = document.getElementById('forward-feedback');
+
+    let lastTapLeft = 0;
+    let lastTapRight = 0;
+
+    if (currentEpisode) {
+      titleElement.textContent = currentEpisode.title;
+      videoPlayer.src = currentEpisode.link;
+
+      const fileIdMatch = currentEpisode.link.match(/\/file\/d\/(.*?)\//);
+      if (fileIdMatch) {
+        const fileId = fileIdMatch[1];
+        downloadBtn.href = `https://drive.google.com/uc?id=${fileId}&export=download`;
+      } else {
+        downloadBtn.href = "#";
+        console.error("Invalid link format: File ID could not be extracted.");
+      }
+
+      const currentSeasonEpisodes = episodes.filter(ep => ep.season === currentEpisode.season);
+      const currentIndex = currentSeasonEpisodes.findIndex(ep => ep.number === episodeNumber);
+
+      if (currentIndex > 0) {
+        const prevEpisode = currentSeasonEpisodes[currentIndex - 1];
+        prevBtn.href = `watch.html?episode=${prevEpisode.number}`;
+      } else {
+        prevBtn.classList.add('d-none');
+      }
+
+      if (currentIndex < currentSeasonEpisodes.length - 1) {
+        const nextEpisode = currentSeasonEpisodes[currentIndex + 1];
+        nextBtn.href = `watch.html?episode=${nextEpisode.number}`;
+      } else {
+        nextBtn.classList.add('d-none');
+      }
+    } else {
+      alert('Episode not found!');
+      window.location.href = 'index.html';
+    }
+
+    function hideSpinner() {
+      loadingSpinner.classList.add('d-none');
+      videoPlayer.classList.remove('d-none');
+    }
+
+    // Double-tap detection for rewind (left)
+    tapLeft.addEventListener("click", () => {
+      const currentTime = new Date().getTime();
+      if (currentTime - lastTapLeft < 300) {
+        videoPlayer.contentWindow.postMessage(JSON.stringify({ event: 'seek', seconds: -10 }), '*');
+        showFeedback(rewindFeedback);
+      }
+      lastTapLeft = currentTime;
+    });
+
+    // Double-tap detection for forward (right)
+    tapRight.addEventListener("click", () => {
+      const currentTime = new Date().getTime();
+      if (currentTime - lastTapRight < 300) {
+        videoPlayer.contentWindow.postMessage(JSON.stringify({ event: 'seek', seconds: 30 }), '*');
+        showFeedback(forwardFeedback);
+      }
+      lastTapRight = currentTime;
+    });
+
+    // Show feedback for rewind or forward
+    function showFeedback(feedbackElement) {
+      feedbackElement.classList.add("show-feedback");
+      setTimeout(() => {
+        feedbackElement.classList.remove("show-feedback");
+      }, 1000);
+    }
+
+    // Fullscreen landscape lock
+    document.addEventListener("fullscreenchange", () => {
+      if (document.fullscreenElement) {
+        screen.orientation.lock("landscape").catch(err => {
+          console.warn("Use different browser. Fullscreen(Landscape) not supported:", err);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
