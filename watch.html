@@ -66,6 +66,25 @@
 
   <script src="script.js"></script>
   <script>
+    // Fullscreen availability check and alert
+    document.addEventListener('DOMContentLoaded', () => {
+      const videoPlayer = document.getElementById('video-player');
+      const isFullscreenAvailable = document.fullscreenEnabled || document.webkitFullscreenEnabled || document.mozFullScreenEnabled;
+
+      if (!isFullscreenAvailable) {
+        // If fullscreen is unavailable, display a message and alert the user
+        alert("Fullscreen is unavailable in your browser. Please open this link in an external browser for fullscreen support.");
+
+        // Optionally, provide a button or link to prompt opening in an external browser
+        const openInBrowserBtn = document.createElement('a');
+        openInBrowserBtn.href = window.location.href;  // Current page URL
+        openInBrowserBtn.textContent = "Open in External Browser";
+        openInBrowserBtn.classList.add('btn', 'btn-info', 'mt-2');
+        document.body.appendChild(openInBrowserBtn);
+      }
+    });
+
+    // Existing code for episode handling
     const params = new URLSearchParams(window.location.search);
     const episodeNumber = parseInt(params.get('episode'));
     const currentEpisode = episodes.find(ep => ep.number === episodeNumber);
