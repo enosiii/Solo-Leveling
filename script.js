@@ -5,6 +5,8 @@ const episodes = [
   { number: 16, title: "Season 2, Episode 4: I Need to Stop Faking", season: 2, link: "https://drive.google.com/file/d/1R3arorfVqHotdcpVmFj8kRDrDnJoDFZ-/preview" },
   { number: 17, title: "Season 2, Episode 5: This Is What We're Trained to Do", season: 2, link: "https://drive.google.com/file/d/1W-n7sYGuccsOvCXPo1EzwHdF_t7TiFeL/preview" },
 
+  { number: 18, title: "Season 2, Episode 6: Don't Look Down on My Guys", season: 2, link: "https://drive.google.com/file/d/1cdQSaNi81fN2Bvq-DAziNjppQ-2DNqzT/preview" },
+
 
   { number: 1, title: "Season 1, Episode 1: I'm Used To It", season: 1, link: "https://drive.google.com/file/d/1IbvAJuBMj1DDEYp0_LPy0Ff5ozaatuXv/preview" },
   { number: 2, title: "Season 1, Episode 2: If I Had One More Chance", season: 1, link: "https://drive.google.com/file/d/1JFssvn4Sq8G5K-P_EDh7voOJgF3yUBsE/preview" },
