@@ -53,7 +53,7 @@ Visit the live site here: [Solo Leveling Anime Website](https://enosiii.github.i
 ## 📸 Screenshots
 
 ### Home Page
-![Solo Leveling Icon](episode-thumbnails/icon.png)
+![Solo Leveling Homepage](episode-thumbnails/sceen-sl.png)
 
 ### Plot Summary
 ![Plot Summary](episode-thumbnails/cover.jpg)
