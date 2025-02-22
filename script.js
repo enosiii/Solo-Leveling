@@ -6,6 +6,7 @@ const episodes = [
   { number: 17, title: "Season 2, Episode 5: This Is What We're Trained to Do", season: 2, link: "https://drive.google.com/file/d/1W-n7sYGuccsOvCXPo1EzwHdF_t7TiFeL/preview" },
   { number: 18, title: "Season 2, Episode 6: Don't Look Down on My Guys", season: 2, link: "https://drive.google.com/file/d/1cdQSaNi81fN2Bvq-DAziNjppQ-2DNqzT/preview" },
   { number: 19, title: "Season 2, Episode 7: The 10th S-Rank Hunter", season: 2, link: "https://drive.google.com/file/d/1goXe8RcFDg4TFdbpJIbYyDdMqRTvndlY/preview" },
+  { number: 20, title: "Season 2, Episode 8: 𝗟𝗼𝗼𝗸𝗶𝗻𝗴 𝗨𝗽 𝘄𝗮𝘀 𝗧𝗶𝗿𝗶𝗻𝗴 𝗠𝗲 𝗢𝘂𝘁", season: 2, link: "https://drive.google.com/file/d/1goXe8RcFDg4TFdbpJIbYyDdMqRTvndlY/preview" },
 
 
   { number: 1, title: "Season 1, Episode 1: I'm Used To It", season: 1, link: "https://drive.google.com/file/d/1IbvAJuBMj1DDEYp0_LPy0Ff5ozaatuXv/preview" },
