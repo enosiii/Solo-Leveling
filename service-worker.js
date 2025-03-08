@@ -1,4 +1,4 @@
-const CACHE_NAME = 'solo-leveling-cache-v2'; // Increment cache version
+const CACHE_NAME = 'solo-leveling-cache-v3'; // Increment cache version
 const STATIC_ASSETS = [
   '/',
   '/index.html',
