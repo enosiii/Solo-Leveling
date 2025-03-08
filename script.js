@@ -8,6 +8,7 @@ const episodes = [
     { number: 19, title: "Season 2, Episode 7: The 10th S-Rank Hunter", season: 2, link: "https://drive.google.com/file/d/1goXe8RcFDg4TFdbpJIbYyDdMqRTvndlY/preview" },
     { number: 20, title: "Season 2, Episode 8: Looking Up Was Tiring Me Out", season: 2, link: "https://drive.google.com/file/d/1m3l1jRtIEpqC46sHYWl2XspsdbzwEuPf/preview" },
     { number: 21, title: "Season 2, Episode 9: It was All Worth It ", season: 2, link: "https://drive.google.com/file/d/1sMAPm7XIw9-lA1TTW6FzDcIi8NiFDYEX/preview" },
+    { number: 22, title: "Season 2, Episode 10: We Need a Hero ", season: 2, link: "https://drive.google.com/file/d/1yq34FgdXM3sCjdlLDFRhj2qQoVHsNwAZ/preview" },
 
   
     { number: 1, title: "Season 1, Episode 1: I'm Used To It", season: 1, link: "https://drive.google.com/file/d/1IbvAJuBMj1DDEYp0_LPy0Ff5ozaatuXv/preview" },
