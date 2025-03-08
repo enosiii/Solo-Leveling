@@ -78,3 +78,32 @@ footer {
 .card:hover {
   transform: scale(1.05);
 }
+
+
+.sort-button {
+    position: relative; 
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    width: 100%;
+    color: #fff;
+    font-size: 0.875rem;
+    left: 50%; 
+    transform: translateX(-50%); 
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.2rem;
+    transition: background-color 0.2s ease;
+}
+
+.sort-button:hover {
+    background-color: #333;
+    border-color: #555; 
+}
+
+.sort-button:active {
+    background-color: #555;
+}
+
+.sort-button:focus {
+    outline: none;  
+    box-shadow: 0 0 0 0.2rem rgba(87, 161, 235, 0.5);
+}
