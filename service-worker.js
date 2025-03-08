@@ -1,9 +1,9 @@
-const CACHE_NAME = 'solo-leveling-cache-v1';
-const urlsToCache = [
+const CACHE_NAME = 'solo-leveling-cache-v2'; // Increment cache version
+const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/styles.css',
-  '/script.js',
+  '/watch.html',
   '/episode-thumbnails/icon.png',
   '/episode-thumbnails/cover.jpg'
 ];
@@ -12,18 +12,11 @@ const urlsToCache = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
+      console.log('Service Worker: Caching static assets');
+      return cache.addAll(STATIC_ASSETS);
     })
   );
-});
-
-// Fetch event
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
-  );
+  self.skipWaiting(); // Immediately activate the new service worker
 });
 
 // Activate event
@@ -33,10 +26,37 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames.map((cache) => {
           if (cache !== CACHE_NAME) {
+            console.log('Service Worker: Clearing old cache:', cache);
             return caches.delete(cache);
           }
         })
       );
+    }).then(() => {
+        console.log("Service Worker: Activated and ready to go!");
+        return self.clients.claim(); //Take control of uncontrolled clients.
+    })
+  );
+});
+
+// Fetch event (Stale-while-revalidate)
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.match(event.request).then((cachedResponse) => {
+        const fetchedResponsePromise = fetch(event.request).then((networkResponse) => {
+          // Check if the network response is valid
+          if (!networkResponse || networkResponse.status !== 200) {
+            return networkResponse;
+          }
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        }).catch(err => {
+            console.error("Fetch Error:", err);
+            return cachedResponse;
+        });
+        // Return the cached response if available, otherwise fetch from the network
+        return cachedResponse || fetchedResponsePromise;
+      });
     })
   );
 });
