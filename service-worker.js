@@ -1,11 +1,11 @@
-const CACHE_NAME = 'solo-leveling-cache-v3'; // Increment cache version
+const CACHE_NAME = 'solo-leveling-cache-v4'; // Increment cache version
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/styles.css',
   '/watch.html',
   '/episode-thumbnails/icon.png',
-  '/episode-thumbnails/cover.jpg'
+  '/episode-thumbnails/cover1.png'
 ];
 
 // Install event
