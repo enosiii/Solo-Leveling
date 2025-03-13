@@ -1,6 +1,6 @@
 # Solo Leveling Anime Website
 
-![Solo Leveling Cover](episode-thumbnails/cover.jpg)
+![Solo Leveling Cover](episode-thumbnails/cover1.png)
 
 Welcome to the **Solo Leveling Anime Website**, your one-stop destination for exploring the thrilling world of **Solo Leveling**. Stream episodes, read summaries, and get the latest updates—all in one place. You can also install the website on your mobile device for quick access!
 
