@@ -8,6 +8,12 @@ Welcome to the **Solo Leveling Anime Website**, your one-stop destination for ex
 
 Visit the live site here: [Solo Leveling Anime Website](https://enosiii.github.io/Solo-Leveling/)
 
+[![GitHub Repo stars](https://img.shields.io/badge/share%20on-reddit-red?logo=reddit)](https://reddit.com/submit?url=https://enosiii.github.io/Solo-Leveling/&title=Solo-Leveling%20Website)
+[![GitHub Repo stars](https://img.shields.io/badge/share%20on-hacker%20news-orange?logo=ycombinator)](https://news.ycombinator.com/submitlink?u=https://enosiii.github.io/Solo-Leveling/)
+[![GitHub Repo stars](https://img.shields.io/badge/share%20on-X-black?logo=x)](https://twitter.com/share?url=https://enosiii.github.io/Solo-Leveling/&text=Check%20out%20this%20Solo-Leveling%20website!)
+[![GitHub Repo stars](https://img.shields.io/badge/share%20on-facebook-1976D2?logo=facebook)](https://www.facebook.com/sharer/sharer.php?u=https://enosiii.github.io/Solo-Leveling/)
+[![GitHub Repo stars](https://img.shields.io/badge/share%20on-linkedin-blue?logo=linkedin)](https://www.linkedin.com/shareArticle?url=https://enosiii.github.io/Solo-Leveling/&title=Solo-Leveling%20Website)
+
 ---
 
 ## 📜 Features
