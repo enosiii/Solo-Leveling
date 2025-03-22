@@ -10,6 +10,7 @@ const episodes = [
     { number: 21, title: "Season 2, Episode 9: It was All Worth It ", season: 2, link: "https://drive.google.com/file/d/1sMAPm7XIw9-lA1TTW6FzDcIi8NiFDYEX/preview" },
     { number: 22, title: "Season 2, Episode 10: We Need a Hero ", season: 2, link: "https://drive.google.com/file/d/1yq34FgdXM3sCjdlLDFRhj2qQoVHsNwAZ/preview" },
     { number: 23, title: "Season 2, Episode 11: It's Going to Get Even More Intense", season: 2, link: "https://drive.google.com/file/d/15jzM5CgVCy6_0RYsVezDdGIajZwyndIu/preview" },
+    { number: 24, title: "Season 2, Episode 12: Are You the King of Humans ", season: 2, link: "https://drive.google.com/file/d/1BwqI7HvWHFYeRqLESh-Sh9Y09--js7FO/preview" },
 
   
     { number: 1, title: "Season 1, Episode 1: I'm Used To It", season: 1, link: "https://drive.google.com/file/d/1IbvAJuBMj1DDEYp0_LPy0Ff5ozaatuXv/preview" },
